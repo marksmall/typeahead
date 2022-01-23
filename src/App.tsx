@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import TypeAhead from './TypeAhead';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
+const search = async (criteria: string) => {
+  const response = await fetch(
+    `https://swapi.dev/api/people/?search=${criteria}`,
+  );
+
+  const body = await response.json();
+
+  return body.results;
+};
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TypeAhead search={search} />
     </div>
   );
-}
+};
 
 export default App;
