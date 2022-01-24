@@ -1,9 +1,17 @@
+import React from 'react';
+
 import TypeAhead from './TypeAhead';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-const search = async (criteria: string) => {
+/**
+ * A function to make API calls to the Star Wars API
+ * and return results.
+ * @param criteria
+ * @returns
+ */
+const search = async (criteria: string): Promise<object[]> => {
   const response = await fetch(
     `https://swapi.dev/api/people/?search=${criteria}`,
   );
@@ -13,7 +21,7 @@ const search = async (criteria: string) => {
   return body.results;
 };
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <TypeAhead search={search} />

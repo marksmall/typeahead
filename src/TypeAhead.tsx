@@ -1,11 +1,23 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { Form, ListGroup, Spinner } from 'react-bootstrap';
 
 import { useDebounce } from './useDebounce';
 import { useThrottle } from './useThrottle';
 
-const TypeAhead = ({ search }: any) => {
+interface TypeaheadProps {
+  search: any;
+}
+
+/**
+ * A typeahead input component that can debounce/throttle requests to the
+ * passed in `search` function prop.
+ *
+ * @param search - The search function to be used by the generic component.
+ *
+ * @returns The component.
+ */
+const TypeAhead: React.FC<TypeaheadProps> = ({ search }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
